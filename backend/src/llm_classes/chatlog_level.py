@@ -14,7 +14,7 @@ class ChatLog:
     def __init__(self, survey_initial_responses: str, start_items=1):
         start_dict = {
             "role": "system",
-            "content": Pipeline.SYSPROMPT.format(
+            "content": ChatLog.SYSPROMPT.format(
                 survey_initial_responses=survey_initial_responses
             ),
         }
@@ -45,5 +45,5 @@ class ChatLog:
 # No
 # """
 # llm = GPT()
-# pipe = Pipeline(string)
+# pipe = ChatLog(string)
 # print(llm.run(pipe.message_list))
