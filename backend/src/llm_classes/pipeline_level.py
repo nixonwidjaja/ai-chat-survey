@@ -1,7 +1,10 @@
 from llm_level import *
 
 
-class Pipeline:
+class ChatLog:
+    '''
+    A class that tracks the current list of messages
+    '''
     # Sysprompt To be updated
     SYSPROMPT = """You are an assistant who is trying to gather user responses for a product.
         You have collected some survey responses, and you would like to probe further about what the user thinks about the product.
@@ -10,7 +13,6 @@ class Pipeline:
     
 
     def __init__(self, survey_initial_responses: str, start_items=1):
-        
         start_dict = {
             "role": "system",
             "content": Pipeline.SYSPROMPT.format(survey_initial_responses = survey_initial_responses)
