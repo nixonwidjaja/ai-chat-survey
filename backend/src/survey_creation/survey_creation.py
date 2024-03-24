@@ -25,13 +25,27 @@ class Question:
         return self.answer is None
         
 
-    def as_dict(self) -> dict[str, object]:
+    def question_as_dict(self) -> dict[str, object]:
         return {
             "id": self.id,
-            "type": self.type
-            # TO BE UPDATED
+            "type": self.type,
+            "question": self.question,  
+            "options": self.options 
         }
     
+    def response_as_dict(self) -> dict[str, object]:
+        if not self.is_complete():
+            raise Exception("Rese not complete!")
+        else:
+            {
+            "question_id": self.id,
+            "type": self.type, 
+            "question": self.question,
+            "options": self.options,
+            "answer": self.answer,
+            }
+        
+
 class Survey:
     '''
     Constructs a survey. Probably client will use this when building survey.
