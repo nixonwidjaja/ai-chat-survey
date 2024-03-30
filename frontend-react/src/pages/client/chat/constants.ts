@@ -9,11 +9,16 @@ export type Messages ={
     message: string;
     question?:Question
   }
-  
+export type SurveyState ={
+  displayIndex:number,
+  submitted:boolean,
+  subtitle:string,
+  title:string
+}
 export type ChatWindowProps ={
     messages: { sender: "user" | "bot"; message: string; question:Question }[];
     isBotThinking: boolean;
-    surveyState: any;
+    surveyState: SurveyState;
     handleQuestionResponse: (id: number, val: string  | number) => void;
     handleSubmit: ()=>void
   }

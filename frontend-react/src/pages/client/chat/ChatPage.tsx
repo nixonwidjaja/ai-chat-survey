@@ -5,12 +5,14 @@ import ChatInput from "./ChatInput";
 import { getUserSurvey,sendMessageApi,submitBaseSurvey} from '../../hooks/useApi';
 import { useParams } from "react-router-dom";
 import { Messages } from "./constants";
+import ChatMessage from "./ChatMessage";
 
 function ChatPage() {
   const {surveyID} = useParams();
   const [messages, setMessages] = useState<Messages[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [surveyState,setSurveyState] =useState({displayIndex:0,submitted:false,subtitle:"",title:""})
+  const [isLast,setIsLast]=useState(false)
   const [token, setToken] = useState("test");
   const [responseID, setResponseId] = useState(1);
   function sendMessage(message: string) {
@@ -20,6 +22,9 @@ function ChatPage() {
       sendMessageApi(responseID,surveyID,message)
         .then((res) => res.data)
         .then((data) => {
+          if (data.is_last){
+            setIsLast(true)
+          } 
           setMessages((prevMessages) => [
             ...prevMessages,
             { sender: "bot", message: data["content"] },
@@ -131,7 +136,8 @@ function ChatPage() {
         </Text>
       </Flex>
        <ChatWindow handleSubmit={handleSubmit} messages={displayMessages} isBotThinking={isLoading} handleQuestionResponse={handleQuestionResponse} surveyState={surveyState}/>
-      { surveyState.submitted  &&<ChatInput onSubmitMessage={sendMessage} isSubmitting={isLoading} />}
+      { surveyState.submitted && !isLast  &&<ChatInput onSubmitMessage={sendMessage} isSubmitting={isLoading} />}
+      {isLast && <ChatMessage sender="bot"> The discussion is over, thank you for your respones</ChatMessage>}
     </Flex>
   );
 }
