@@ -25,6 +25,14 @@ ai-chat-survey/
 │   ├── ...
 │   └── README.md              # Backend specific documentation
 │
+├── backend-gpu/               # Backend-gpu specific files
+│   ├── Dockerfile             # Dockerfile for backend-gpu
+│   ├── Pipfile                # Backend-gpu dependencies
+│   ├── Pipfile.lock           # Backend-gpu dependencies
+│   ├── src/                   # Backend-gpu source files
+│   ├── ...
+│   └── README.md              # Backend-gpu specific documentation
+│
 ├── scripts/                   # Scripts for deployment, setup, etc.
 │
 ├── docs/                      # Documentation files
