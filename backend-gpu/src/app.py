@@ -840,7 +840,16 @@ def send_chat_message(survey_id: str, response_id: str) -> tuple[Response, int]:
 # TODO: Think of a better way than having the same function without authentication
 # Function to get response object without admin token required
 # Exactly the same as get_response except it is not an endpoint, and there is no admin verification token.
-def get_response_no_auth(survey_id, response_id):
+def get_response_no_auth(survey_id: str, response_id: str) -> tuple[Response, int]:
+    """Get response by response ID and survey ID without authentication
+
+    Args:
+        survey_id (str): Survey ID
+        response_id (str): Response ID
+
+   Returns:
+        tuple[Response, int]: Tuple containing the response and status code
+    """    
     # Connect to MySQL database
     connection = database_operations.connect_to_mysql()
     if not connection:
